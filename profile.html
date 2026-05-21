@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile Dashboard</title>
+    <style>
+        body { background-color: #0b3d1c; font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; color: white; }
+        .profile-card { background: rgba(0, 0, 0, 0.4); padding: 40px; border-radius: 8px; width: 350px; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        h2 { text-align: center; margin-bottom: 25px; border-bottom: 2px solid #fff; padding-bottom: 10px; }
+        .data-row { margin-bottom: 15px; font-size: 16px; }
+        .label { font-weight: bold; color: #aaa; text-transform: uppercase; font-size: 12px; display: block; }
+        .val { font-size: 18px; margin-top: 2px; color: #fff; }
+        .logout-btn { width: 100%; padding: 12px; background: #c0392b; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; margin-top: 25px; text-align: center;}
+        .logout-btn:hover { background: #e74c3c; }
+    </style>
+</head>
+<body>
+
+<div class="profile-card">
+    <h2>User Profile</h2>
+    
+    <div class="data-row">
+        <span class="label">Full Name</span>
+        <div class="val" id="profileName">Loading...</div>
+    </div>
+    
+    <div class="data-row">
+        <span class="label">Username / Email</span>
+        <div class="val" id="profileUsername">Loading...</div>
+    </div>
+    
+    <div class="data-row">
+        <span class="label">Gender Identification</span>
+        <div class="val" id="profileGender">Loading...</div>
+    </div>
+
+    <button class="logout-btn" onclick="logout()">Logout Session</button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Read the user string payload stored inside active memory
+    const sessionToken = localStorage.getItem('loggedInUser');
+
+    // Security Gate: Kick unauthenticated guests back out to login view 
+    if (!sessionToken) {
+        alert("Unauthorized access detected. Please log in first.");
+        window.location.href = 'index.html';
+        return;
+    }
+
+    // Convert string object structure back into fully parsed JSON tracking parameters
+    const userData = JSON.parse(sessionToken);
+
+    // Render properties matching your specific SQL column layout mapping
+    document.getElementById('profileName').textContent = `${userData.fname} ${userData.lname}`;
+    document.getElementById('profileUsername').textContent = userData.username;
+    document.getElementById('profileGender').textContent = userData.gender;
+});
+
+function logout() {
+    localStorage.removeItem('loggedInUser'); // Erase stored memory data parameters
+    window.location.href = 'index.html';     // Return back to entry screen 
+}
+</script>
+
+</body>
+</html>

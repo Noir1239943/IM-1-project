@@ -1,0 +1,189 @@
+/* Reset & Base Layout */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0f2cbe; /* Bright Royal Blue background matching your layout theme */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px;
+}
+
+/* Dashboard Wrapper Window */
+.dashboard-container {
+    width: 100%;
+    max-width: 960px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Top Navigation Header Tabs */
+.top-nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 25px;
+    width: 100%;
+}
+
+.nav-tab {
+    background-color: #000000;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 10px 45px;
+    border-radius: 6px;
+    text-align: center;
+    transition: opacity 0.2s;
+}
+
+.nav-tab:hover {
+    opacity: 0.85;
+}
+
+/* Active State representation */
+.nav-tab.active {
+    box-shadow: inset 0 0 0 2px #ffffff; /* Subtle outline for the current tab screen */
+}
+
+/* Main Dashboard White Card Block */
+.main-card {
+    background-color: #ffffff;
+    width: 100%;
+    min-height: 480px;
+    border: 1px solid #7a7a7a;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Green Section Heading Bar */
+.section-header {
+    background-color: #5cb85c; /* Flat green accent line matching the UI layout */
+    padding: 10px 15px;
+    border-bottom: 1px solid #7a7a7a;
+}
+
+.section-header h2 {
+    color: #000000;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* Profile Flex Container layout setup */
+.profile-layout {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #7a7a7a;
+}
+
+/* Dark Profile Image placeholder */
+.profile-img-box {
+    background-color: #2b2321; /* Dark chocolate/charcoal brown color matching image */
+    width: 220px;
+    min-height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid #7a7a7a;
+    flex-shrink: 0;
+}
+
+.profile-img-box span {
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Table Grid for Info Structure */
+.details-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.details-table td {
+    border-bottom: 1px solid #7a7a7a;
+    border-right: 1px solid #7a7a7a;
+    padding: 10px 15px;
+    font-size: 13px;
+    vertical-align: middle;
+    height: 40px;
+}
+
+/* Remove last columns border line */
+.details-table td:last-child {
+    border-right: none;
+}
+
+/* Remove bottom row line to match the layout baseline */
+.details-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Custom alignment styles for data labels vs user inputs */
+.label-cell {
+    background-color: #e8e8e8; /* Light gray cell background */
+    color: #000000;
+    font-weight: 600;
+    width: 18%;
+    text-align: right;
+}
+
+.value-cell {
+    background-color: #dcdcdc; /* Slightly darker gray cell background */
+    color: #333333;
+    width: 32%;
+    text-align: left;
+}
+
+/* Bottom Actions Panel Area */
+.action-container {
+    padding: 25px;
+}
+
+.btn-change-pw {
+    background-color: #0f2cbe;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 30px;
+    border-radius: 6px;
+    display: inline-block;
+    transition: opacity 0.2s;
+}
+
+.btn-change-pw:hover {
+    opacity: 0.9;
+}
+
+/* Table layout fallback adjustments for tablet and phone dimensions */
+@media (max-width: 768px) {
+    .profile-layout {
+        flex-direction: column;
+    }
+    .profile-img-box {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #7a7a7a;
+        padding: 30px;
+    }
+    .top-nav {
+        justify-content: center;
+    }
+    .details-table tr {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .details-table td {
+        border-right: 1px solid #7a7a7a !important;
+        text-align: left;
+    }
+}

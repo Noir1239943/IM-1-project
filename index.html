@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Portal - Login</title>
+    <style>
+        body { background-color: #0b3d1c; font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; color: white; }
+        .login-card { background: rgba(0, 0, 0, 0.4); padding: 40px; border-radius: 8px; width: 300px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+        h2 { margin-bottom: 25px; }
+        .input-group { margin-bottom: 15px; position: relative; }
+        input { width: 100%; padding: 10px; box-sizing: border-box; border-radius: 4px; border: none; background: #e8f0fe; margin-top: 5px; }
+        button { width: 100%; padding: 12px; background: #555; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; font-weight: bold; margin-top: 15px; }
+        button:hover { background: #666; }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <h2>Login</h2>
+    <form id="loginForm">
+        <div class="input-group">
+            <input type="text" id="username" placeholder="Email / Username" required>
+        </div>
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Password" required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const usernameVal = document.getElementById('username').value.trim();
+    const passwordVal = document.getElementById('password').value;
+
+    try {
+        const response = await fetch('http://localhost:3006/userlogin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: usernameVal, password: passwordVal })
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+            alert('Welcome back! Login successful.');
+            
+            // 💾 Hand off the authenticated user data profile to local browser storage
+            localStorage.setItem('loggedInUser', JSON.stringify(result.user));
+            
+            // 🚀 Smoothly route user to profile page
+            window.location.href = 'profile.html';
+        } else {
+            alert(result.message || 'Login failed. Please check credentials.');
+        }
+    } catch (err) {
+        console.error('Network error:', err);
+        alert('Could not reach the authentication server. Verify your backend terminal is active.');
+    }
+});
+</script>
+
+</body>
+</html>

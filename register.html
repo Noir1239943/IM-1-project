@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - Personal Info</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="register.style.css">
+</head>
+
+<body>
+
+    <div class="form-card">
+        <h1>Personal Info</h1>
+
+        <form>
+            <div class="form-grid">
+
+                <div class="form-column">
+                    <p class="column-instruction">
+                        Please enter your name. Fill out all the fields if possible. Required fields are marked with
+                        <i class="fa-solid fa-circle-exclamation required-badge"></i>
+                    </p>
+
+                    <div class="input-wrapper">
+                        <label>
+                            <i class="fa-solid fa-circle-exclamation required-badge"></i> First Name
+                        </label>
+                        <div class="input-field">
+                            <i class="fa-regular fa-address-card field-icon"></i>
+                            <input type="text" id="reg-fname" placeholder="First Name" required>
+                        </div>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label>Middle Name</label>
+                        <div class="input-field">
+                            <i class="fa-regular fa-address-card field-icon"></i>
+                            <input type="text" placeholder="Middle Name">
+                        </div>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label>
+                            <i class="fa-solid fa-circle-exclamation required-badge"></i> Last Name
+                        </label>
+                        <div class="input-field">
+                            <i class="fa-regular fa-address-card field-icon"></i>
+                            <input type="text" id="reg-lname" placeholder="Last Name" required>
+                        </div>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label>Name Suffix</label>
+                        <div class="input-field">
+                            <i class="fa-regular fa-address-card field-icon"></i>
+                            <input type="text" placeholder="Name Suffix">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-column">
+                    <p class="column-instruction">
+                        Please enter your email address and password. Make sure the email address you enter is valid.
+                    </p>
+
+                    <div class="input-wrapper">
+                        <label>
+                            <i class="fa-solid fa-circle-exclamation required-badge"></i> Email
+                        </label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-envelope field-icon"></i>
+                            <input type="email" id="reg-email" placeholder="Email" required>
+                        </div>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label>
+                            <i class="fa-solid fa-circle-exclamation required-badge"></i> Password
+                        </label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-lock field-icon"></i>
+                            <input type="password" id="reg-password" placeholder="Password" required>
+                        </div>
+                    </div>
+
+                    <div class="input-wrapper">
+                        <label>
+                            <i class="fa-solid fa-circle-exclamation required-badge"></i> Confirm Password
+                        </label>
+                        <div class="input-field">
+                            <i class="fa-solid fa-lock field-icon"></i>
+                            <input type="password" id="reg-confirm-password" placeholder="Confirm Password" required>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-navigation">
+                <a href="index.html" class="btn btn-back">
+                    <i class="fa-solid fa-chevron-left"></i> Back
+                </a>
+                <button type="submit" id="btn-continue" class="btn btn-continue">
+                    Continue <i class="fa-solid fa-play"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+<script>
+document.getElementById('btn-continue').addEventListener('click', async (event) => {
+    event.preventDefault(); 
+
+    const fnameValue = document.getElementById('reg-fname').value.trim();
+    const lnameValue = document.getElementById('reg-lname').value.trim();
+    const emailValue = document.getElementById('reg-email').value.trim();
+    const passwordValue = document.getElementById('reg-password').value;
+    const confirmPasswordValue = document.getElementById('reg-confirm-password').value;
+
+    if (!fnameValue || !lnameValue || !emailValue || !passwordValue) {
+        alert("Please fill out all required fields!");
+        return;
+    }
+
+    if (passwordValue !== confirmPasswordValue) {
+        alert("Passwords do not match!");
+        return;
+    }
+
+    const userData = {
+        username: emailValue, 
+        password: passwordValue,
+        fname: fnameValue,
+        lname: lnameValue,
+        gender: 'male' // Default string matching your DB query requirement
+    };
+
+    try {
+        const response = await fetch('http://localhost:3006/usersave', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+            alert('Personal information saved successfully!');
+            // clear form or redirect to login portal
+        } else {
+            alert('Error from server: ' + (result.message || 'Could not save data.'));
+        }
+    } catch (error) {
+        console.error('Network Connection Failure:', error);
+        alert('Could not establish connection with the backend server.');
+    }
+});
+</script>
+
+
+</body>
+
+</html>

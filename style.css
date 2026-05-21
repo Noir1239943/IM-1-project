@@ -1,0 +1,166 @@
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0b6623; /* Forest Green background matching the image */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Wrapper Container */
+.container {
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+}
+
+/* White Login Card */
+.login-card {
+    background-color: #ffffff;
+    width: 100%;
+    padding: 50px 40px;
+    border-radius: 24px; /* Distinct rounded corners */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.login-card h2 {
+    color: #888888;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    letter-spacing: 0.5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Input Fields Styles */
+.input-group {
+    position: relative;
+    width: 100%;
+}
+
+.input-group .icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888888;
+    font-size: 16px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px 12px 42px;
+    border: 1.5px solid #444444;
+    border-radius: 12px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-group input::placeholder {
+    color: #b0b0b0;
+}
+
+.input-group input:focus {
+    border-color: #0b6623;
+}
+
+/* Actions Layout (Button + Checkbox) */
+.actions-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 25px;
+    margin-top: 5px;
+}
+
+.login-btn {
+    background-color: #5cb85c; /* Lighter bright green for the login button */
+    color: #ffffff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+}
+
+.login-btn:hover {
+    background-color: #4cae4c;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    color: #888888;
+    font-size: 14px;
+}
+
+.remember-me input {
+    cursor: pointer;
+    accent-color: #5cb85c;
+}
+
+/* Bottom External Navigation Links */
+.footer-links {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.footer-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+.footer-links a:hover {
+    opacity: 0.8;
+}
+
+/* Responsive adjustment for extra small screens */
+@media (max-width: 400px) {
+    .login-card {
+        padding: 40px 20px;
+    }
+    .actions-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .login-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .footer-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+}
